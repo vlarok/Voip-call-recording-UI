@@ -1,0 +1,59 @@
+﻿<div class="row">
+    <div class="col-md-4">
+        <div class="has-feedback">
+            <label>Otsing</label>
+
+            <input class="form-control" name="search" type="text" ng-model="search.Author" />
+
+        </div>
+
+
+    </div>
+
+
+</div><br /><br />
+    <h1>{{title}}</h1>
+    <strong>kommentaare teemas: <a>{{comments.length}}</a></strong>
+    <br />
+    <br />
+    <div class="jumbotron" ng-repeat="comment in comments | filter:search">
+
+        <p>
+            <label>Pealkiri:</label> {{comment.Title}}
+        </p><label> Autor: </label> {{comment.Author}} <label> Sisestatud: </label> {{comment.Created}}
+        <p>{{comment.Body}}</p>
+
+    </div>
+
+    <h1>Lisa Kommentaar</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <form name="AddCommentForm" novalidate>
+
+                <fieldset>
+                    <div ng-class="EditProductForm.$invalid ? '' : 'has-success'" class="has-feedback">
+                        <label>Autor</label>
+
+                        <input class="form-control" name="productName" type="text" ng-model="authorComment" required ng-minlength="3" />
+                        <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="AddCommentForm.$invalid"></span>
+
+                        <label>Pealkiri</label>
+
+                        <input class="form-control" name="productName" type="text" ng-model="titleComment" required ng-minlength="3" />
+                        <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="AddCommentForm.$invalid"></span>
+
+                        <label>Keha</label>
+                        <textarea class="form-control" name="productName" type="text" ng-model="bodyComment" required ng-minlength="3"></textarea>
+                        <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="AddCommentForm.$invalid"></span>
+                        <p></p>
+                    </div>
+
+                    <div>
+                        <button class="btn btn-primary" ng-click="add()" ng-disabled="AddCommentForm.$invalid">Lisa</button>
+                        <a href="/" class="btn">Loobu</a>
+                        <p></p>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>

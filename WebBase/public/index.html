@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Telpro</title>
+    <base href="/" />
+    <link href="public/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="public/css/toaster.min.css" rel="stylesheet" />
+    <link href="public/css/custom.min.css" rel="stylesheet" />
+    <link href="public/css/telpro.css" rel="stylesheet" />
+    <link href="public/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+<toaster-container></toaster-container>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Telpro</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/">Calls</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Users/Agents</a>
+                        <ul class="dropdown-menu">
+                            <a href="/user">Users/Agents</a>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/manage">Management</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container" ng-view="">
+</div>
+
+</body>
+<script src="public/scripts/angular.min.js"></script>
+<script src="public/scripts/ui-bootstrap-tpls-1.3.3.min.js"></script>
+
+<script src="public/scripts/datetime-picker.min.js"></script>
+<script src="public/scripts/angular-animate.min.js"></script>
+<script src="public/scripts/toaster.min.js"></script>
+<script src="public/scripts/angular-route.min.js"></script>
+<script src="public/scripts/angular-resource.min.js"></script>
+<script src="public/scripts/angular-translate.min.js"></script>
+<script src="public/app.js"></script>
+<script src="public/app/common/mvNotifier.js"></script>
+<script src="public/app/call/mvCall.js"></script>
+<script src="public/app/call/mvCallCUD.js"></script>
+<script src="public/app/call/mvCallCtrl.js"></script>
+<script src="public/app/comment/mvComment.js"></script>
+<script src="public/app/comment/mvCommentCtrl.js"></script>
+<script src="public/app/comment/mvCommentCUD.js"></script>
+<script src="public/app/registration/mvRegistration.js"></script>
+<script src="public/app/registration/mvRegistrationCUD.js"></script>
+<script src="public/app/user/mvUser.js"></script>
+<script src="public/app/user/mvUserCUD.js"></script>
+<script src="public/app/user/mvUserCtrl.js"></script>
+
+<script src="public/app/user/mvUserEditCtrl.js"></script>
+</html>

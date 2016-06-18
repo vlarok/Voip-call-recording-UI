@@ -1,0 +1,69 @@
+﻿<h1>Uudised</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form name="NewCallForm" novalidate>
+
+            <fieldset>
+                <div ng-class="NewCallForm.$invalid ? '' : 'has-success'" class="has-feedback">
+                    <label>Pealkiri</label>
+
+                    <input class="form-control" name="CallName" type="text" ng-model="title" required ng-minlength="3" />
+                    <span class="glyphicon glyphicon-ok form-control-feedback"  ng-hide="NewCallForm.$invalid"></span>
+                    
+                    <p></p>
+                    <label>Sissejuhatus</label>
+                    <input class="form-control" name="CallName" type="text" ng-model="intro" required ng-minlength="3" />
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="NewCallForm.$invalid"></span>
+                    <p></p>
+                    <label>Keha</label>
+                    <textarea class="form-control" name="CallName" type="text" ng-model="body" required ng-minlength="3"></textarea>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="NewCallForm.$invalid"></span>
+                    <p></p>
+                </div>
+
+                <div>
+                    <button class="btn btn-primary" ng-click="add()" ng-disabled="NewCallForm.$invalid">Lisa</button>
+                    <a href="/" class="btn">Loobu</a>
+                    <p></p>
+                </div>
+            </fieldset>
+</form>
+    </div>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            
+            <th>Pealkiri</th>
+            <th>Sissejuhatav tekst</th>
+            <th>Keha</th>
+            <th>Loomisaeg</th>
+            <th>Kommentaarid</th>
+            <th>Vaata</th>
+            <th>Varja</th>
+            <th>Kustuta</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="p in Call">
+            <td>{{ p.Title }}</td>
+            <td>{{ p.Intro }}</td>
+            <td>{{ p.Body.length }}</td>
+            <td>{{ p.Created }}</td>
+            <td>{{ p.Comments.length }}</td>
+            <td>
+                <a href="/product/{{p.ProductId}}" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i></a>
+
+            </td>
+            <td>
+                <div class="btn btn-warning" ng-click="hide(p)"><i class="glyphicon glyphicon-remove"></i></div>
+            </td>
+            <td>
+                <div class="btn btn-danger" ng-click="delete(p)"><i class="glyphicon glyphicon-remove"></i>
+                </div>
+            </td>
+            
+        </tr>
+    </tbody>
+</table> 

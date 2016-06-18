@@ -1,0 +1,72 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            {{'CREATE_USER'|translate}}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well bs-component">
+            <form name="NewUserForm" novalidate>
+
+                <fieldset>
+                    <div class="col-lg-4">
+                        <div ng-class="NewUserForm.$invalid ? '' : 'has-success'" class="has-feedback">
+                            <label>{{'USERNAME'|translate}}</label>
+
+                            <input class="form-control" name="userName" type="text" ng-model="userName" required ng-minlength="3" />
+                            <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="NewUserForm.$invalid"></span>
+                            <p></p>
+                            <label>{{'EMAIL'|translate}}</label>
+
+                            <input class="form-control" name="email" type="text" ng-model="email" required ng-minlength="3" />
+                            <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="NewUserForm.$invalid"></span>
+                            <p></p>
+
+                            <label>{{'PASSWORD'|translate}}</label>
+
+                            <input class="form-control" name="password" type="text" ng-model="password" required ng-minlength="3" />
+                            <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="NewUserForm.$invalid"></span>
+                            <p></p>
+                            <label>{{'CONF_PASSWORD'|translate}}</label>
+
+                            <input class="form-control" name="passwordConfirm" type="text" ng-model="passwordConfirm" required ng-minlength="3" />
+                            <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="NewUserForm.$invalid"></span>
+                            <p></p>
+
+                        </div>
+
+                        <div>
+                            <button class="btn btn-primary" ng-click="add()" ng-disabled="NewUserForm.$invalid">{{'ADD'|translate}}</button>
+                            <a href="/" class="btn">{{'CANCEL'|translate}}</a>
+                            <p></p>
+                        </div>
+                    </div>
+</fieldset>
+            </form>    </div>
+    </div>
+</div>
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+
+            <th>{{'USERNAME'|translate}}</th>
+            <th>{{'PHONE_NUMBER'|translate}}</th>
+            <th>{{'EDIT'|translate}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in users">
+            <td>{{ user.UserName }}</td>
+            <td>{{ user.PhoneNumber  }}</td>
+            <td>
+                <a href="/user/{{user.UserId}}" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i></a>
+
+            </td>
+
+        </tr>
+    </tbody>
+</table> 

@@ -1,0 +1,47 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            {{'EDIT_USER'|translate}}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well bs-component">
+            <form name="NewUserForm" novalidate>
+
+                <fieldset>
+                    <div class="col-lg-4">
+                        <div ng-class="NewUserForm.$invalid ? '' : 'has-success'" class="has-feedback">
+                            <label>{{'USERNAME'|translate}}</label>
+
+                            <input class="form-control" name="userName" type="text" ng-model="userName" required ng-minlength="3" />
+                            <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="NewUserForm.$invalid"></span>
+                            <p></p>
+                            <label>{{'PHONE_NUMBER'|translate}}</label>
+
+                            <input class="form-control" name="phoneNumber" type="text" ng-model="phoneNumber" required ng-minlength="3" />
+                            <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="NewUserForm.$invalid"></span>
+                            <p></p>
+                            
+                            <label>{{'EMAIL'|translate}}</label>
+
+                            <input class="form-control" name="email" type="text" ng-model="email" required ng-minlength="3" />
+                            <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="NewUserForm.$invalid"></span>
+                            <p></p>
+
+                          
+
+                        </div>
+
+                        <div>
+                            <button class="btn btn-primary" ng-click="update()" ng-disabled="NewUserForm.$invalid">{{'UPDATE'|translate}}</button>
+                            <a href="/" class="btn">{{'CANCEL'|translate}}</a>
+                            <p></p>
+                        </div>
+                    </div>
+</fieldset>
+            </form>    </div>
+    </div>
+</div>
+

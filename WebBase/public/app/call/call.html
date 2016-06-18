@@ -1,0 +1,133 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            Search calls
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well well-sm">
+            <form class="form-horizontal">
+                <fieldset>
+
+                    <div class="form-group col-sm-3">
+                        <label class="control-label">From</label>
+                        <p class="input-group">
+
+                            <input type="text" class="form-control" datetime-picker="dd.MM.yyyy HH:mm:ss" ng-model="picker1.date" timepicker-options="picker1.timepickerOptions" is-open="picker1.open" datepicker-options="picker1.datepickerOptions" when-closed="picker1.closed(args)" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'picker1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+
+                        </p>
+                        <label class="control-label">To</label>
+                        <p class="input-group">
+
+                            <input type="text" class="form-control" datetime-picker="dd.MM.yyyy HH:mm:ss" ng-model="picker2.date" timepicker-options="picker2.timepickerOptions" is-open="picker2.open" datepicker-options="picker2.datepickerOptions" when-closed="picker2.closed(args)" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'picker2')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="form-group col-sm-1">
+
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label class="control-label">Search</label>
+                        <input class="form-control" name="search" type="text" placeholder="Search" ng-model="search" />
+                    </div>
+
+                </fieldset>
+            </form>
+            <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div>
+        </div>
+    </div>
+</div>
+<div><label> {{ 'TOTAL_ITEMS' | translate }}: {{customfiltered.length}}</label></div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th ng-click="sortType = 'Created' ; sortReverse = !sortReverse">
+                        Duration
+                        <div class="pull-right">
+                            <i ng-hide="sortType == 'Created'" class="fa fa-sort" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Created' && !sortReverse" class="fa fa-sort-asc" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Created' && sortReverse" class="fa fa-sort-desc" aria-hidden="true"></i>
+                        </div>
+                    </th>
+                    <th  ng-click="sortType = 'Duration' ; sortReverse = !sortReverse">
+                            Duration
+                        <div class="pull-right">
+                            <i ng-hide="sortType == 'Duration'" class="fa fa-sort" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Duration' && !sortReverse" class="fa fa-sort-asc" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Duration' && sortReverse" class="fa fa-sort-desc" aria-hidden="true"></i>
+                        </div>
+                    </th>
+                    <th ng-click="sortType = 'Anumber' ; sortReverse = !sortReverse">
+                        Anumber
+                        <div class="pull-right">
+                            <i ng-hide="sortType == 'Anumber'" class="fa fa-sort" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Anumber' && !sortReverse" class="fa fa-sort-asc" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Anumber' && sortReverse" class="fa fa-sort-desc" aria-hidden="true"></i>
+                        </div>
+                    </th>
+                    <th ng-click="sortType = 'Bnumber' ; sortReverse = !sortReverse">
+                        Bnumber
+                        <div class="pull-right">
+                            <i ng-hide="sortType == 'Bnumber'" class="fa fa-sort" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Bnumber' && !sortReverse" class="fa fa-sort-asc" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Bnumber' && sortReverse" class="fa fa-sort-desc" aria-hidden="true"></i>
+                        </div>
+                    </th>
+                    <th ng-click="sortType = 'Dir' ; sortReverse = !sortReverse">
+                        Direction
+                        <div class="pull-right">
+                            <i ng-hide="sortType == 'Dir'" class="fa fa-sort" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Dir' && !sortReverse" class="fa fa-sort-asc" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Dir' && sortReverse" class="fa fa-sort-desc" aria-hidden="true"></i>
+                        </div>
+                    </th>
+                    <th ng-click="sortType = 'User' ; sortReverse = !sortReverse">
+                        User
+                        <div class="pull-right">
+                            <i ng-hide="sortType == 'User'" class="fa fa-sort" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'User' && !sortReverse" class="fa fa-sort-asc" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'User' && sortReverse" class="fa fa-sort-desc" aria-hidden="true"></i>
+                        </div>
+                    </th>
+                    <th ng-click="sortType = 'Service' ; sortReverse = !sortReverse">
+                        Service
+                        <div class="pull-right">
+                            <i ng-hide="sortType == 'Service'" class="fa fa-sort" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Service' && !sortReverse" class="fa fa-sort-asc" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Service' && sortReverse" class="fa fa-sort-desc" aria-hidden="true"></i>
+                        </div>
+                    </th>
+
+                    <th>Play</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="call in customfiltered=(calls| filter:search)| orderBy:sortType:sortReverse  | startFrom:(bigCurrentPage-1)*itemsPerPage | limitTo:itemsPerPage ">
+                    <td>{{ call.Created | date:"dd.MM.yyyy HH:mm:ss"}}</td>
+                    <td>{{ call.Duration }}</td>
+                    <td>{{ call.Anumber }}</td>
+                    <td>{{ call.Bnumber }}</td>
+                    <td>{{ call.Dir | status | translate}}</td>
+                    <td>{{ call.User }}</td>
+                    <td>
+                        {{ call.Service }}
+                    </td>
+                    <td class="text-center col-md-1">
+                        <div class="btn btn-sm btn-success"><i class="glyphicon glyphicon-play"></i></div>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<uib-pagination class="pagination-sm" total-items="customfiltered.length" items-per-page="itemsPerPage" ng-model="bigCurrentPage" max-size="maxSize" boundary-link-numbers="true" boundary-links="true" rotate="false" first-text="{{ 'FIRST' | translate }}" last-text="{{ 'LAST' | translate }}" previous-text="{{ 'PREVIOUS' | translate }}" next-text="{{ 'NEXT' | translate }}"></uib-pagination>
