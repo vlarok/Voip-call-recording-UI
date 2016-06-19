@@ -1,0 +1,58 @@
+﻿<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            {{'MANAGE_USER'|translate}}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well bs-component">
+            <form name="ServiceForm" novalidate>
+
+                <fieldset>
+                    <div class="col-lg-4">
+                        <div ng-class="ServiceForm.$invalid ? '' : 'has-success'" class="has-feedback">
+                            <label>{{'SERVICE_NAME'|translate}}</label>
+
+                            <input class="form-control" name="userName" type="text" ng-model="selectedService.Name" required ng-minlength="3" />
+                            <span class="glyphicon glyphicon-ok form-control-feedback" ng-hide="ServiceForm.$invalid"></span>
+                            <p></p>
+                        </div>
+
+                        <div>
+               
+                            <button ng-disabled="ServiceForm.$invalid" ng-show="selectedService.ServiceId" ng-click="update(selectedService)" class="btn btn-default">{{'UPDATE'|translate}}</button>
+                            <button ng-disabled="ServiceForm.$invalid" ng-show="!!!selectedService.ServiceId" ng-click="add(selectedService)" class="btn btn-success">{{'ADD'|translate}}</button>
+                            <button ng-show="selectedService" ng-click="clear()" class="btn btn-warning">{{'CANCEL'|translate}}</button>
+                            <p></p>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>{{'ID'|translate}}</th>
+            <th>{{'NAME'|translate}}</th>
+            <th>{{'CREATED'|translate}}</th>
+            <th>{{'EDIT'|translate}}</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="service in services">
+        <td>{{ service.ServiceId }}</td>
+        <td>{{ service.Name }}</td>
+        <td>{{ service.Created | date:"dd.MM.yyyy HH:mm" }}</td>
+        <td>
+            <a href="#" ng-click="edit(service)" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i></a>
+
+        </td>
+
+    </tr>
+    </tbody>
+</table> 

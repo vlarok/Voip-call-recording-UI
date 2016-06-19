@@ -30,9 +30,17 @@ namespace DAL.Migrations
             var userId = string.Empty;
             if (context.Roles.Count() == 0)
             {
-                context.Roles.Add(new IdentityRole("Admin"));
 
-                context.Roles.Add(new IdentityRole("User"));
+                context.Roles.Add(new Role("listenCalls"));
+
+                context.Roles.Add(new Role("listenOwnCalls"));
+                context.Roles.Add(new Role("manageUsers"));
+                context.Roles.Add(new Role("manageGroups"));
+                context.Roles.Add(new Role("manageServices"));
+                context.Roles.Add(new Role("manageRoles"));
+                //context.Roles.Add(new IdentityRole("Admin"));
+
+                //  context.Roles.Add(new IdentityRole("User"));
                 context.SaveChanges();
                 var manager = new ApplicationUserManager(new UserStore<User>(context));
                 var testUser = new User() { UserName = "admin" };
@@ -40,8 +48,8 @@ namespace DAL.Migrations
                 manager.Create(testUser, "!College83");
                 userId = testUser.Id;
                 context.SaveChanges();
-                manager.AddToRole(userId, "Admin");
-                context.SaveChanges();
+             //   manager.AddToRole(userId, "Admin");
+            //    context.SaveChanges();
 
                 var service = new Service()
                 {

@@ -91,12 +91,63 @@ namespace DAL.Migrations
                     {
                         UserId = c.String(nullable: false, maxLength: 128),
                         RoleId = c.String(nullable: false, maxLength: 128),
+                        YesNo = c.Boolean(),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.UserGroups",
+                c => new
+                    {
+                        UserGroupId = c.Int(nullable: false, identity: true),
+                        UserId = c.String(maxLength: 128),
+                        GroupId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.UserGroupId)
+                .ForeignKey("dbo.Groups", t => t.GroupId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId)
+                .Index(t => t.GroupId);
+            
+            CreateTable(
+                "dbo.Groups",
+                c => new
+                    {
+                        GroupId = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                        Created = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.GroupId);
+            
+            CreateTable(
+                "dbo.RoleGroups",
+                c => new
+                    {
+                        RoleGroupId = c.Int(nullable: false, identity: true),
+                        RoleId = c.String(maxLength: 128),
+                        GroupId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.RoleGroupId)
+                .ForeignKey("dbo.Groups", t => t.GroupId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId)
+                .Index(t => t.RoleId)
+                .Index(t => t.GroupId);
+            
+            CreateTable(
+                "dbo.AspNetRoles",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(nullable: false, maxLength: 256),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
             CreateTable(
                 "dbo.Comments",
@@ -114,29 +165,27 @@ namespace DAL.Migrations
                 .ForeignKey("dbo.Calls", t => t.Call_CallId)
                 .Index(t => t.Call_CallId);
             
-            CreateTable(
-                "dbo.AspNetRoles",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Comments", "Call_CallId", "dbo.Calls");
+            DropForeignKey("dbo.UserGroups", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.UserGroups", "GroupId", "dbo.Groups");
+            DropForeignKey("dbo.RoleGroups", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.RoleGroups", "GroupId", "dbo.Groups");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Calls", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Calls", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Calls", "ServiceId", "dbo.Services");
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Comments", new[] { "Call_CallId" });
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.RoleGroups", new[] { "GroupId" });
+            DropIndex("dbo.RoleGroups", new[] { "RoleId" });
+            DropIndex("dbo.UserGroups", new[] { "GroupId" });
+            DropIndex("dbo.UserGroups", new[] { "UserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
@@ -144,8 +193,11 @@ namespace DAL.Migrations
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Calls", new[] { "ServiceId" });
             DropIndex("dbo.Calls", new[] { "UserId" });
-            DropTable("dbo.AspNetRoles");
             DropTable("dbo.Comments");
+            DropTable("dbo.AspNetRoles");
+            DropTable("dbo.RoleGroups");
+            DropTable("dbo.Groups");
+            DropTable("dbo.UserGroups");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");

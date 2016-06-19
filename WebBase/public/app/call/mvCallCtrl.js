@@ -7,6 +7,11 @@
         return [];
     }
 });
+angular.module('app').filter('num', function () {
+    return function (input) {
+        return parseInt(input, 10);
+    };
+});
 angular.module('app').filter('status', function ($translate) {
 
     var statusDict = {
@@ -19,19 +24,26 @@ angular.module('app').filter('status', function ($translate) {
 });
 angular.module('app').controller('mvCallCtrl', function ($scope, mvCall, mvCallCUD) {
 
+  
+
     var start = new Date();
     start.setHours(0, 0, 0, 0);
+  
 
+    console.log(start);
     var end = new Date();
-    end.setHours(23, 59, 59, 999);
+    
 
+    end.setHours(23, 59, 59, 999);
+   
 
     var post = function () {
+        console.log(start);
         var postData = {
             From: start,
             To: end
         };
-
+        console.log(JSON.stringify(postData));
 
         mvCallCUD.getRange(postData).then(function (response) {
            

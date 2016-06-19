@@ -35,13 +35,13 @@ namespace Desktop
             Call newCall = new Call()
             {
 
-                Anumber = "777",
-                Bnumber = "2222",
+                Anumber = tbAnumber.Text,
+                Bnumber = tbBnumber.Text,
                 Created = DateTime.Now,
                 UserId = "0eb2699e-3746-410d-98e8-d61a1ccfcbc6",
-                Dir = "1",
-                ServiceId = 1,
-                Duration = "23"
+                Dir = tbDirection.Text,
+                ServiceId = Convert.ToInt32(tbService.Text),
+                Duration = tbDuration.Text
 
             };
 

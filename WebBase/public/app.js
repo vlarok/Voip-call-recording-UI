@@ -16,6 +16,14 @@ angular.module('app').config(function ($routeProvider, $locationProvider,$transl
             templateUrl: '/public/app/user/user.html',
             controller: 'mvUserCtrl'
         })
+        .when('/role', {
+            templateUrl: '/public/app/role/role.html',
+            controller: 'mvRoleCtrl'
+        })
+        .when('/service', {
+            templateUrl: '/public/app/service/service.html',
+            controller: 'mvServiceCtrl'
+        })
          .when('/user/:id', {
              templateUrl: '/public/app/user/userEdit.html',
              controller: 'mvUserEditCtrl'

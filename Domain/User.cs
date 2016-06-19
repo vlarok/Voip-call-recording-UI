@@ -13,8 +13,10 @@ namespace Domain
     {
 
 
-        public virtual List<Call> Products { get; set; } = new List<Call>();
+        public virtual List<Call> Calls { get; set; } = new List<Call>();
         public string Address { get; set; }
+        public virtual List<UserGroup> UserGroups { get; set; } = new List<UserGroup>();
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

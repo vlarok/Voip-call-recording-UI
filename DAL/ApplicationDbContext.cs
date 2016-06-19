@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +20,10 @@ namespace DAL
         {
             return new ApplicationDbContext();
         }
-        public System.Data.Entity.DbSet<Call> Calls { get; set; }
-        public System.Data.Entity.DbSet<Comment> Comments { get; set; }
-        public System.Data.Entity.DbSet<Service> Services { get; set; }
+        public DbSet<Call> Calls { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Role> Roles { get; set; }
     }
 }

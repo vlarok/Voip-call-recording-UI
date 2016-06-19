@@ -200,6 +200,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="server\Controllers\Api\AccountController.cs" />
     <Compile Include="server\Controllers\Api\CommentController.cs" />
+    <Compile Include="server\Controllers\Api\RoleController.cs" />
+    <Compile Include="server\Controllers\Api\GroupController.cs" />
+    <Compile Include="server\Controllers\Api\ServiceController.cs" />
     <Compile Include="server\Controllers\Api\UserController.cs" />
     <Compile Include="server\Controllers\Api\CallController.cs" />
     <Compile Include="Global.asax.cs">
@@ -239,6 +242,15 @@
     <Content Include="public\app\call\productAdd.html" />
     <Content Include="public\app\call\productDetail.html" />
     <Content Include="public\app\call\productView.html" />
+    <Content Include="public\app\role\mvRole.js" />
+    <Content Include="public\app\role\mvGroup.js" />
+    <Content Include="public\app\role\mvRoleCtrl.js" />
+    <Content Include="public\app\role\mvRoleCUD.js" />
+    <Content Include="public\app\role\role.html" />
+    <Content Include="public\app\service\service.html" />
+    <Content Include="public\app\service\mvService.js" />
+    <Content Include="public\app\service\mvServiceCtrl.js" />
+    <Content Include="public\app\service\mvServiceCUD.js" />
     <Content Include="public\app\comment\comment.html" />
     <Content Include="public\app\comment\mvComment.js" />
     <Content Include="public\app\comment\mvCommentCtrl.js" />

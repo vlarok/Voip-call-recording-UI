@@ -35,11 +35,10 @@ namespace WebBase.server.Controllers.Api
         
         public RangeResponse Post(Range range)
         {
-            //var ser = service;
-            //  _repo.UdpateService(service);/*
+           //TODO: datetime validation 
             RangeResponse response = new RangeResponse()
             {
-                Calls = _service.getCallsRange(range.From, range.To)
+                Calls = _service.getCallsRange(range.From.ToLocalTime(), range.To.ToLocalTime())
             };
            
             return response;

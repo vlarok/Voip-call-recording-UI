@@ -13,30 +13,43 @@
 
                     <div class="form-group col-sm-3">
                         <label class="control-label">From</label>
-                        <p class="input-group">
+                        <div class="input-group">
 
                             <input type="text" class="form-control" datetime-picker="dd.MM.yyyy HH:mm:ss" ng-model="picker1.date" timepicker-options="picker1.timepickerOptions" is-open="picker1.open" datepicker-options="picker1.datepickerOptions" when-closed="picker1.closed(args)" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'picker1')"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>
 
-                        </p>
+                        </div>
                         <label class="control-label">To</label>
-                        <p class="input-group">
+                        <div class="input-group">
 
                             <input type="text" class="form-control" datetime-picker="dd.MM.yyyy HH:mm:ss" ng-model="picker2.date" timepicker-options="picker2.timepickerOptions" is-open="picker2.open" datepicker-options="picker2.datepickerOptions" when-closed="picker2.closed(args)" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'picker2')"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>
-                        </p>
+                        </div>
                     </div>
                     <div class="form-group col-sm-1">
 
                     </div>
                     <div class="form-group col-sm-4">
-                        <label class="control-label">Search</label>
-                        <input class="form-control" name="search" type="text" placeholder="Search" ng-model="search" />
-                    </div>
+                        <div>
+                            <label class="control-label">Search</label>
+
+
+                            <input class="form-control" name="search" type="text" placeholder="Search" ng-model="search"/>
+
+                        </div>
+                        <div>
+                            <label class="control-label">Direction</label>
+                            <select class="form-control" id="select" ng-model="search2.Dir">
+                                <option selected="selected" value="">Both</option>
+                                <option value="1">IN</option>
+                                <option value="0">OUT</option>
+                            </select>
+</div>
+                        </div>
 
                 </fieldset>
             </form>
@@ -58,28 +71,28 @@
                             <i ng-show="sortType == 'Created' && sortReverse" class="fa fa-sort-desc" aria-hidden="true"></i>
                         </div>
                     </th>
-                    <th  ng-click="sortType = 'Duration' ; sortReverse = !sortReverse">
+                    <th  ng-click="sortType = 'Duration | num' ; sortReverse = !sortReverse">
                             Duration
                         <div class="pull-right">
-                            <i ng-hide="sortType == 'Duration'" class="fa fa-sort" aria-hidden="true"></i>
-                            <i ng-show="sortType == 'Duration' && !sortReverse" class="fa fa-sort-asc" aria-hidden="true"></i>
-                            <i ng-show="sortType == 'Duration' && sortReverse" class="fa fa-sort-desc" aria-hidden="true"></i>
+                            <i ng-hide="sortType == 'Duration | num'" class="fa fa-sort" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Duration | num' && !sortReverse" class="fa fa-sort-asc" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Duration | num' && sortReverse" class="fa fa-sort-desc" aria-hidden="true"></i>
                         </div>
                     </th>
-                    <th ng-click="sortType = 'Anumber' ; sortReverse = !sortReverse">
+                    <th ng-click="sortType = 'Anumber | num' ; sortReverse = !sortReverse">
                         Anumber
                         <div class="pull-right">
-                            <i ng-hide="sortType == 'Anumber'" class="fa fa-sort" aria-hidden="true"></i>
-                            <i ng-show="sortType == 'Anumber' && !sortReverse" class="fa fa-sort-asc" aria-hidden="true"></i>
-                            <i ng-show="sortType == 'Anumber' && sortReverse" class="fa fa-sort-desc" aria-hidden="true"></i>
+                            <i ng-hide="sortType == 'Anumber | num'" class="fa fa-sort" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Anumber | num' && !sortReverse" class="fa fa-sort-asc" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Anumber | num' && sortReverse" class="fa fa-sort-desc" aria-hidden="true"></i>
                         </div>
                     </th>
-                    <th ng-click="sortType = 'Bnumber' ; sortReverse = !sortReverse">
+                    <th ng-click="sortType = 'Bnumber | num' ; sortReverse = !sortReverse">
                         Bnumber
                         <div class="pull-right">
-                            <i ng-hide="sortType == 'Bnumber'" class="fa fa-sort" aria-hidden="true"></i>
-                            <i ng-show="sortType == 'Bnumber' && !sortReverse" class="fa fa-sort-asc" aria-hidden="true"></i>
-                            <i ng-show="sortType == 'Bnumber' && sortReverse" class="fa fa-sort-desc" aria-hidden="true"></i>
+                            <i ng-hide="sortType == 'Bnumber | num'" class="fa fa-sort" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Bnumber | num' && !sortReverse" class="fa fa-sort-asc" aria-hidden="true"></i>
+                            <i ng-show="sortType == 'Bnumber | num' && sortReverse" class="fa fa-sort-desc" aria-hidden="true"></i>
                         </div>
                     </th>
                     <th ng-click="sortType = 'Dir' ; sortReverse = !sortReverse">
@@ -111,9 +124,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="call in customfiltered=(calls| filter:search)| orderBy:sortType:sortReverse  | startFrom:(bigCurrentPage-1)*itemsPerPage | limitTo:itemsPerPage ">
+                <tr ng-repeat="call in customfiltered=(calls| filter:search | filter:search2)| orderBy:sortType:sortReverse  | startFrom:(bigCurrentPage-1)*itemsPerPage | limitTo:itemsPerPage ">
                     <td>{{ call.Created | date:"dd.MM.yyyy HH:mm:ss"}}</td>
-                    <td>{{ call.Duration }}</td>
+                    <td>{{ call.Duration |num }}</td>
                     <td>{{ call.Anumber }}</td>
                     <td>{{ call.Bnumber }}</td>
                     <td>{{ call.Dir | status | translate}}</td>

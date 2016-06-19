@@ -48,8 +48,8 @@ namespace BLL.Services
 
         public List<CallDTO> getCallsRange(DateTime @from, DateTime to)
         {
-            return this._repo.All.Where(c => c.Created <= to.ToUniversalTime()
-                                       && (c.Created) >= @from.ToUniversalTime()).Select(x => _factory.createBasicDTO(x)).ToList();
+            return this._repo.All.Where(c => c.Created <= to
+                                       && (c.Created) >= @from).Select(x => _factory.createBasicDTO(x)).ToList();
         }
     }
 }
