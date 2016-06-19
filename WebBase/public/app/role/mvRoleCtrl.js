@@ -1,9 +1,10 @@
 ﻿
 angular.module('app').controller('mvRoleCtrl', function ($scope, mvRole,mvGroup, mvRoleCUD) {
     var setPrivileges = [];
+    var listOfObjects = [];
    var getGroups= function() {
-       $scope.roles = mvGroup.query(function () {
-
+       $scope.groups = mvGroup.query(function (gr) {
+          
        });
 
    }
@@ -32,29 +33,66 @@ angular.module('app').controller('mvRoleCtrl', function ($scope, mvRole,mvGroup,
 
 
     $scope.edit = function (role) {
+        setPrivileges = [];
+        role.Roles.forEach(function (entry) {
+            console.log(JSON.stringify(entry.RoleId));
+            setPrivileges.push(entry.RoleId);
+        });
+
         $scope.selectedRole = role;
     };
 
-    $scope.add = function (role) {
+    $scope.add = function (group) {
+       
+        console.log(JSON.stringify(group));
+        setPrivileges.forEach(function(entry) {
+            var singleObj = {}
+            singleObj['RoleId'] = entry;
+          //  singleObj['GroupId'] = group.GroupId;
+            listOfObjects.push(singleObj);
+        });
+
+        console.log(JSON.stringify(listOfObjects));
         var newData = {
-            name: role.Name,
-            created: new Date()
+            name: group.Name,
+            created: new Date(),
+            RoleGroups: listOfObjects
         };
 
         mvRoleCUD.addOrUpdate(newData).then(function (response) {
 
-            $scope.roles.push(response);
+            $scope.groups.push(response);
             $scope.selectedRole = null;
+            setPrivileges = [];
         }, function (reason) {
 
         });
     };
 
-    $scope.update = function (role) {
+    $scope.update = function (group) {
         
-        mvRoleCUD.addOrUpdate(role).then(function (response) {
+
+       
+        console.log(JSON.stringify(group));
+        setPrivileges.forEach(function (entry) {
+            var singleObj = {}
+            singleObj['RoleId'] = entry;
+            singleObj['GroupId'] = group.GroupId;
+            listOfObjects.push(singleObj);
+        });
+
+        console.log(JSON.stringify(listOfObjects));
+        var newData = {
+            groupId:group.GroupId,
+            name: group.Name,
+            created: new Date(),
+            RoleGroups: listOfObjects
+        };
+
+        mvRoleCUD.addOrUpdate(newData).then(function (response) {
 
             $scope.selectedRole = null;
+            setPrivileges = [];
         }, function (reason) {
 
         });
@@ -62,6 +100,7 @@ angular.module('app').controller('mvRoleCtrl', function ($scope, mvRole,mvGroup,
 
     $scope.clear = function () {
         $scope.selectedRole = null;
+        setPrivileges = [];
         getGroups();
     };
 

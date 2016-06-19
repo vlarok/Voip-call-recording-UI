@@ -28,6 +28,7 @@ namespace WebBase.server.Controllers.Api
 
         public HttpResponseMessage Put(Group group)
         {
+            
             group.Created = group.Created.ToLocalTime();
             //var ser = service;
             //  _repo.UdpateService(service);/*

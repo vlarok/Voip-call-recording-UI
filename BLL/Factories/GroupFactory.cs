@@ -19,7 +19,10 @@ namespace BLL.Factories
             {
                 GroupId = group.GroupId,
                 Name = group.Name,
-                Created = group.Created
+                Created = group.Created,
+                Roles = group.RoleGroups.Select(s=>new RoleDTO() {RoleId = s.RoleId,Name = s.Role.Name}).ToList()
+                // Bids = product.Bids.Select(s => new BidDTO() { UserName = s.User.UserName, BidValue = s.BidValue }).ToList()
+
             };
 
 

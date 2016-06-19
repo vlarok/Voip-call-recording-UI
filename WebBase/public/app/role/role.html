@@ -29,17 +29,26 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
-                      
+                    </div>
+                        <div class="col-lg-4">
+
                             <ul ng-repeat="privilege in privileges">
-                                <li class="" ng-show="!active(privilege.Name)" ng-click="addPrivilege(privilege.Name)"><i class="fa fa-square-o" aria-hidden="true"></i> <span>{{ privilege.Name | translate }}</span></li>
-                                <li class="" ng-show="active(privilege.Name)" ng-click="removePrivilege(privilege.Name)"><i class="fa fa-check-square-o" aria-hidden="true"></i> <span>{{ privilege.Name | translate }}</span></li>
-                                <!--    <td>{{r.id}}</td>-->
+
+                                <li class="" ng-show="!active(privilege.RoleId)" ng-click="addPrivilege(privilege.RoleId)">
+                                    <i class="fa fa-square-o" aria-hidden="true"></i>
+                                    <div class="pull-right"><strong>{{ privilege.Name | translate }}</strong></div>
+                                </li>
+                                <li class="alert-success" ng-show="active(privilege.RoleId)" ng-click="removePrivilege(privilege.RoleId)">
+                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                    <div class="pull-right"><strong>{{ privilege.Name | translate }}</strong></div>
+                                </li>
+                                <!-- <td>{{r.id}}</td>-->
 
                             </ul>
-                      
-                    </div>
-                    
-                </fieldset>
+
+                        </div>
+
+</fieldset>
                 
         </form>
     </div>
@@ -55,11 +64,11 @@
         </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="role in roles">
-        <td>{{ role.Name }}</td>
-        <td>{{ role.Created | date:"dd.MM.yyyy HH:mm" }}</td>
+    <tr ng-repeat="group in groups">
+        <td>{{ group.Name }}</td>
+        <td>{{ group.Created | date:"dd.MM.yyyy HH:mm" }}</td>
         <td>
-            <a href="#" ng-click="edit(role)" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i></a>
+            <a href="#" ng-click="edit(group)" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i></a>
 
         </td>
 

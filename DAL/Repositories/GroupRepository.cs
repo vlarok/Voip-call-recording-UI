@@ -32,7 +32,8 @@ namespace DAL.Repositories
         {
             try
             {
-
+                ///eemaladada kõik RoleGroup suhted ja lisada uuesti
+               
                 _ctx.Groups.AddOrUpdate(group);
                 _ctx.SaveChanges();
                 return true;
